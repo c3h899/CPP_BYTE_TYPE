@@ -1,6 +1,7 @@
 /**
   * Simplified Bit-field implementation for embedded development.
   * EXPERIMENTAL BUILD
+  * Should provide *most* functionality expected from other int types
   */
 
 #ifndef BITFIELD_HPP_
@@ -46,14 +47,12 @@ typedef struct byte_t{
 
 	// Actual Data
 	union {
-		uint8_t data;
+		uint8_t data = 0;
 	};
 
-	/** Constructor
-	  * TODO: constexpr constructor
-	  * constexpr byte_t(auto i){data = i;} allows for byte_t Byte = 0x40,
-	  * but breaks byte_t Byte;
-	  */
+	// Constructor
+	constexpr byte_t(){}
+	constexpr byte_t(auto i){data = i;}
 
 	// Behavior Extensions
 	constexpr void clear(byte_e b){data &= ~b;}
